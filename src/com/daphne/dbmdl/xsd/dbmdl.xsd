@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://www.daphne.com/schema/dbmdl"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.daphne.com/schema/dbmdl">
+	<xsd:element name="dbmdl">
+		<xsd:complexType>
+			<xsd:sequence>
+				<xsd:element name="dataSource" maxOccurs="unbounded"
+					minOccurs="1">
+					<xsd:complexType>
+						<xsd:attribute name="dataSourceName"></xsd:attribute>
+						<xsd:attribute name="userName"></xsd:attribute>
+						<xsd:attribute name="passWord"></xsd:attribute>
+						<xsd:attribute name="JdbcUrl"></xsd:attribute>
+						<xsd:attribute name="driverClass"></xsd:attribute>
+						<xsd:attribute name="initialPoolSize"></xsd:attribute>
+						<xsd:attribute name="minPoolSize"></xsd:attribute>
+						<xsd:attribute name="maxPoolSize"></xsd:attribute>
+						<xsd:attribute name="maxStatements"></xsd:attribute>
+						<xsd:attribute name="maxIdleTime"></xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="duty" maxOccurs="unbounded">
+					<xsd:complexType>
+						<xsd:attribute name="className" type="xsd:ID" use="required"></xsd:attribute>
+						<xsd:attribute name="description" type="xsd:string"></xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+				<xsd:element name="handler" maxOccurs="1" minOccurs="1">
+					<xsd:complexType>
+						<xsd:attribute name="className" type="xsd:ID" use="required"></xsd:attribute>
+						<xsd:attribute name="description" type="xsd:string"></xsd:attribute>
+					</xsd:complexType>
+				</xsd:element>
+			</xsd:sequence>
+		</xsd:complexType>
+	</xsd:element>
+</xsd:schema>

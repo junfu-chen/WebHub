@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<p:dbmdl xmlns:p="http://www.daphne.com/schema/dbmdl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.daphne.com/schema/dbmdl com/daphne/dbmdl/xsd/dbmdl.xsd ">
+	<dataSource dataSourceName="DPOS" 
+		driverClass="oracle.jdbc.driver.OracleDriver"
+		JdbcUrl="jdbc:oracle:thin:@dposdb2dev.daphne.com.cn:1532:dposdev" 
+		userName="D10DEF4EF82471D119798651E4BB16F8"
+		passWord="D10DEF4EF82471D119798651E4BB16F8" 
+		initialPoolSize="10" 
+		maxIdleTime="10" 
+		maxPoolSize="50"
+		maxStatements="50" 
+		minPoolSize="5" />
+
+	<duty className="com.daphne.dbmdl.duty.ZipDuty" description="压缩组件" />
+	<duty className="com.daphne.dbmdl.duty.XmlDuty" description="解析XML组件" />
+	<duty className="com.daphne.dbmdl.duty.SecurityDuty" description="安全验证组件" />
+	<duty className="com.daphne.dbmdl.duty.OpenSessionDuty"
+		description="DB session管理" />
+	<handler className="com.daphne.dbmdl.handler.DefaultDataHandler" />
+</p:dbmdl>
