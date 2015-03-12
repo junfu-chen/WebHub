@@ -135,7 +135,7 @@ public class DefaultDataHandler implements DataHandler {
 	private ResultSet executeQuery(Connection conn,String sql, ArrayList<Object> params)
 			throws MdlException {
 		try {
-			PreparedStatement ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql,ResultSet.TYPE_SCROLL_INSENSITIVE,ResultSet.CONCUR_READ_ONLY);
 			if (params != null) {
 				for (int i = 1; i <= params.size(); i++) {
 					ps.setObject(i, params.get(i - 1));
@@ -160,6 +160,7 @@ public class DefaultDataHandler implements DataHandler {
 
 			ResultSet ds = executeQuery( conn,sql, params);
 			StringBuilder sb = new StringBuilder();
+			sb.append("[");
 			int count = 0;
 			while (ds.next()) {
 				Map<String, Object> map = new HashMap<String, Object>();
@@ -167,7 +168,12 @@ public class DefaultDataHandler implements DataHandler {
 					map.put(ds.getMetaData().getColumnName(i), ds.getObject(i));
 				}
 				try {
-					sb.append(JsonParser.getInstance().toJson(map));
+					if(!ds.isLast()){
+						sb.append(JsonParser.getInstance().toJson(map)+",");
+					}
+					else{
+						sb.append(JsonParser.getInstance().toJson(map));
+					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -175,6 +181,7 @@ public class DefaultDataHandler implements DataHandler {
 				}
 				count++;
 			}
+			sb.append("]");
 			Map<String, String> result = new HashMap<String, String>();
 			result.put("jsonData", sb.toString());
 			result.put("count", count + "");
